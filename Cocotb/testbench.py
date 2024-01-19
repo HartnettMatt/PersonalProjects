@@ -1,4 +1,5 @@
 import cocotb
+import monitor
 from cocotb.triggers import Timer
 
 async def reset_dut(reset_n, duration_ns):
