@@ -1,0 +1,1 @@
+C:\Xilinx\Vivado\2023.1\bin\vivado.bat -mode batch -source "C:\Users\maha7943\Documents\Libera\SSIM-GSE\FPGA\SSIM_PPS_1\report_timing_summary.tcl"

@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Generate Bitstream",
+            "type": "command",
+            "program": "$WORKSPACE_DIR$/gen_bitstream.bat",
+            "args":[]
+        },
+        {
+            "name": "Timing Summary",
+            "type": "command",
+            "program": "$WORKSPACE_DIR$/report_timing_summary.bat",
+            "args":[]
+        },
+        {
+            "name": "Run Simulation",
+            "type": "command",
+            "program": "$WORKSPACE_DIR$/run_simulation.bat",
+            "args":[]
+        }
+        
+    ]
+}
