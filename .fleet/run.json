@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "Run Axi2Apb Simulation",
+            "type": "command",
+            "program": "$WORKSPACE_DIR$/Cocotb/axiToApb/run_simulation.sh",
+            "args":[]
+        }
+    ]
+}
