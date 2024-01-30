@@ -1,0 +1,1 @@
+wsl.exe --shell-type login -- ./Cocotb/SpiToAxi/run_simulation.sh
