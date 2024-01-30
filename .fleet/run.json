@@ -1,19 +1,11 @@
 {
     "configurations": [
         {
-<<<<<<< HEAD
             "name": "Run Simulation",
             "type": "command",
             "program": "$WORKSPACE_DIR$/Cocotb/SpiToAxi/run_simulation.bat",
             "args":[]
         }
 
-=======
-            "name": "Run Axi2Apb Simulation",
-            "type": "command",
-            "program": "$WORKSPACE_DIR$/Cocotb/axiToApb/run_simulation.sh",
-            "args":[]
-        }
->>>>>>> ee9ea857e06ba66307854dd9bbd9a7aacf8a66e1
     ]
 }
