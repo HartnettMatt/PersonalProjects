@@ -2,7 +2,7 @@ import cocotb
 from cocotb.triggers import RisingEdge
 
 
-class Monitor:
+class monitor:
     def __init__(self, clk, datas, valid):
         self._values = []
         self._clk = clk

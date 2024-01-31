@@ -89,7 +89,7 @@ VL_ATTR_COLD void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
             Vtop___024root___dump_triggers__stl(vlSelf);
 #endif
-            VL_FATAL_MT("/mnt/c/Users/maha7943/Documents/PersonalProjects/Cocotb/SpiToAxi/spi2axi.sv", 34, "", "Settle region did not converge.");
+            VL_FATAL_MT("/home/matt/Documents/Personal/PersonalProjects/Cocotb/SpiToAxi/spi2axi.sv", 34, "", "Settle region did not converge.");
         }
         __VstlIterCount = ((IData)(1U) + __VstlIterCount);
         __VstlContinue = 0U;

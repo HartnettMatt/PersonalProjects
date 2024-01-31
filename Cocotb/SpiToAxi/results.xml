@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1706656155" />
-    <testcase name="write" classname="tb" file="/mnt/c/Users/maha7943/Documents/PersonalProjects/Cocotb/SpiToAxi/tb.py" lineno="54" time="0.03528785705566406" sim_time_ns="3380.001" ratio_time="95783.68543797632" />
+    <property name="random_seed" value="1706724789" />
+    <testcase name="write" classname="tb" file="/home/matt/Documents/Personal/PersonalProjects/Cocotb/SpiToAxi/tb.py" lineno="67" time="0.044798851013183594" sim_time_ns="3700.001" ratio_time="82591.4262602661" />
   </testsuite>
 </testsuites>

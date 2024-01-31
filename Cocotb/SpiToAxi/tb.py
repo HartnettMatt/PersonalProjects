@@ -1,8 +1,21 @@
 import cocotb
-import monitor
+from monitor import *
 import random
 from cocotb.triggers import Timer
 from cocotb.triggers import RisingEdge
+
+class SpiToAxiTester:
+    def __init__(self, SpiToAxi):
+        self.dut =SpiToAxi
+        spi_mon_datas = {"MOSI": self.dut.spi_mosi, "MISO": self.dut.spi_miso}
+        self.spi_mon = monitor(self.dut.spi_sck, spi_mon_datas, 1 )
+
+
+    async def spi_write(self, byte):
+        for i in range (8):
+            await RisingEdge(self.dut.spi_sck)
+            self.dut.spi_mosi.value = (byte & 2**i) >> i
+
 
 
 async def reset_dut(reset_n, duration_ns):
@@ -54,11 +67,12 @@ async def reset(dut):
 @cocotb.test()
 async def write(dut):
     await reset(dut)
-    await Timer(20, "ns")
-    write_address = random.getrandbits(32)
-    for cycle in range(32):
-        await RisingEdge(dut.spi_sck)
-        dut.spi_mosi.value = (write_address & 2**cycle) >> cycle
+    write_address = random.randbytes(4)
+    dut.spi_ss_n.value = 0
+    tester = SpiToAxiTester(dut)
+    await tester.spi_write(0)
+    for i in range(4):
+        await tester.spi_write(write_address[i])
 
     await Timer(2000, "ns")
 

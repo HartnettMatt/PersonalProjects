@@ -1,9 +1,15 @@
 {
     "configurations": [
         {
-            "name": "Run Simulation",
+            "name": "Run Simulation (Windows)",
             "type": "command",
             "program": "$WORKSPACE_DIR$/Cocotb/SpiToAxi/run_simulation.bat",
+            "args":[]
+        },
+        {
+            "name": "Run Simulation (Linux)",
+            "type": "command",
+            "program": "$WORKSPACE_DIR$/Cocotb/SpiToAxi/simulate.sh",
             "args":[]
         }
 

@@ -1,0 +1,9 @@
+Gtk-Message: 11:13:09.453: Failed to load module "canberra-gtk-module"
+
+GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+
+[0] start time.
+[3700001] end time.
+GTKWAVE | Executing Tcl script './run_simulation.tcl'
+GTKWAVE | invalid command name "gtkwave::/View/Fullscreen"
+WM Destroy
