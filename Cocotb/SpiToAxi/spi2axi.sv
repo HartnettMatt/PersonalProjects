@@ -172,8 +172,8 @@ module spi2axi #( // @suppress "File contains multiple design units"
     //----------------------------------------------------------------------------------------------
 
     always_ff@(posedge axi_aclk) begin: spi_fsm
-        logic [2:0] spi_rx_bit_idx = 0;
-        logic [$clog2(SPI_FRAME_LENGTH_BYTES):0] spi_rx_byte_idx = 0;
+        logic [2:0] spi_rx_bit_idx;
+        logic [$clog2(SPI_FRAME_LENGTH_BYTES):0] spi_rx_byte_idx;
         logic [2:0] spi_tx_bit_idx = 0;
         logic [$clog2(SPI_FRAME_LENGTH_BYTES):0] spi_tx_byte_idx = 0;
         logic spi_sck_re;
@@ -273,9 +273,9 @@ module spi2axi #( // @suppress "File contains multiple design units"
                     end else begin
                         if (spi_rx_cmd == CMD_WRITE) begin
                             if (spi_rx_byte_idx <= 4) begin
-                                spi_rx_addr <= spi_rx_addr[23:0] & spi_rx_shreg;
+                                spi_rx_addr <= {spi_rx_addr[23:0], spi_rx_shreg};
                             end else if (spi_rx_byte_idx <= 8) begin
-                                spi_rx_wdata <= spi_rx_wdata[23:0] & spi_rx_shreg;
+                                spi_rx_wdata <= {spi_rx_wdata[23:0], spi_rx_shreg};
                                 //
                                 if (spi_rx_byte_idx == 8) begin
                                     // Write data complete -> trigger the AXI write access 

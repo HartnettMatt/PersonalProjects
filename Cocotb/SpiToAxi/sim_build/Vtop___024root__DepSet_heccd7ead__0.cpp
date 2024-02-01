@@ -138,8 +138,6 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     __Vdly__spi2axi__DOT__spi_rx_shreg = vlSelf->spi2axi__DOT__spi_rx_shreg;
     __Vdly__spi2axi__DOT__axi_fsm_reset = vlSelf->spi2axi__DOT__axi_fsm_reset;
     __Vdly__spi2axi__DOT__spi_rx_valid = vlSelf->spi2axi__DOT__spi_rx_valid;
-    vlSelf->spi2axi__DOT__spi_fsm__DOT__spi_rx_bit_idx = 0U;
-    vlSelf->spi2axi__DOT__spi_fsm__DOT__spi_rx_byte_idx = 0U;
     vlSelf->spi2axi__DOT__spi_fsm__DOT__spi_tx_bit_idx = 0U;
     vlSelf->spi2axi__DOT__spi_fsm__DOT__spi_tx_byte_idx = 0U;
     if (vlSelf->axi_aresetn) {
@@ -197,12 +195,12 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
             } else if ((0U == (IData)(vlSelf->spi2axi__DOT__spi_rx_cmd))) {
                 if ((4U >= (IData)(vlSelf->spi2axi__DOT__spi_fsm__DOT__spi_rx_byte_idx))) {
                     __Vdly__spi2axi__DOT__spi_rx_addr 
-                        = (0xffffffU & (vlSelf->spi2axi__DOT__spi_rx_addr 
-                                        & (IData)(vlSelf->spi2axi__DOT__spi_rx_shreg)));
+                        = ((vlSelf->spi2axi__DOT__spi_rx_addr 
+                            << 8U) | (IData)(vlSelf->spi2axi__DOT__spi_rx_shreg));
                 } else if ((8U >= (IData)(vlSelf->spi2axi__DOT__spi_fsm__DOT__spi_rx_byte_idx))) {
                     __Vdly__spi2axi__DOT__spi_rx_wdata 
-                        = (0xffffffU & (vlSelf->spi2axi__DOT__spi_rx_wdata 
-                                        & (IData)(vlSelf->spi2axi__DOT__spi_rx_shreg)));
+                        = ((vlSelf->spi2axi__DOT__spi_rx_wdata 
+                            << 8U) | (IData)(vlSelf->spi2axi__DOT__spi_rx_shreg));
                     if ((8U == (IData)(vlSelf->spi2axi__DOT__spi_fsm__DOT__spi_rx_byte_idx))) {
                         __Vdly__spi2axi__DOT__spi_rx_valid = 1U;
                     }
