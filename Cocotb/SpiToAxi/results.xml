@@ -1,7 +1,7 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1706747658" />
-    <testcase name="write" classname="tb" file="/home/matt/Documents/Personal/PersonalProjects/Cocotb/SpiToAxi/tb.py" lineno="118" time="0.3451874256134033" sim_time_ns="37600.001" ratio_time="108926.33453604001" />
-    <testcase name="read" classname="tb" file="/home/matt/Documents/Personal/PersonalProjects/Cocotb/SpiToAxi/tb.py" lineno="142" time="0.0025708675384521484" sim_time_ns="2200.001000000004" ratio_time="855742.6499400923" />
+    <property name="random_seed" value="1706804718" />
+    <testcase name="write" classname="tb" file="/mnt/c/Users/maha7943/Documents/PersonalProjects/Cocotb/SpiToAxi/tb.py" lineno="118" time="0.3084676265716553" sim_time_ns="37600.001" ratio_time="121892.85928604806" />
+    <testcase name="read" classname="tb" file="/mnt/c/Users/maha7943/Documents/PersonalProjects/Cocotb/SpiToAxi/tb.py" lineno="142" time="0.0020842552185058594" sim_time_ns="2200.001000000004" ratio_time="1055533.4013159478" />
   </testsuite>
 </testsuites>
