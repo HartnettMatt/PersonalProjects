@@ -72,6 +72,19 @@ class SpiToAxiTester:
         self.dut.spi_sck.value = 0
         self.dut.spi_mosi.value = 0
 
+    # Read from SPI bus
+    async def spi_read(self):
+        self.dut.spi_ss_n.value = 0
+        spi_clk_thread = cocotb.start_soon(generate_clock(self.dut.spi_sck, self.spi_period))
+        read_val = 0
+        for i in range(7, -1, -1):
+            await RisingEdge(self.dut.spi_sck)
+            read_val = read_val + (self.dut.spi_mosi.value << i)
+        spi_clk_thread.cancel()
+        self.dut.spi_ss_n.value = 1
+        self.dut.spi_sck.value = 0
+        return read_val.to_bytes(1, 'big')
+
     # Reset the axi bus for a given duration
     async def axi_reset(self, duration):
         # Reset the axi bus for 100 ns
@@ -94,7 +107,7 @@ class SpiToAxiTester:
                         self.dut.s_axi_bresp.value = 3
                 self.dut.s_axi_bvalid.value = 1
                 await RisingEdge(self.dut.axi_aclk)
-                self.dut.s_axi_bvalid = 0
+                self.dut.s_axi_bvalid.value = 0
                 self.dut.s_axi_bresp.value = 0
             else:
                 await RisingEdge(self.dut.s_axi_bready)
@@ -127,7 +140,7 @@ async def write(dut):
     # cocotb.log.info("Data: " + ' '.join(format(byte, '02x') for byte in write_data))
     dut.s_axi_awready.value = 1
     dut.s_axi_wready.value = 1
-    await tester.spi_write(0)
+    await tester.spi_write(0)  # Initiate a write transaction
     for i in range(4):
         await tester.spi_write(write_address[i])
     for i in range(4):
@@ -137,6 +150,8 @@ async def write(dut):
     await tester.spi_write(0)  # don't care
     assert tester.axi_aw_mon._values[0]['Address'].integer == int.from_bytes(write_address, byteorder='big')
     assert tester.axi_wr_mon._values[0]['Data'].integer == int.from_bytes(write_data, byteorder='big')
+    dut.s_axi_awready.value = 0
+    dut.s_axi_wready.value = 0
 
 
 @cocotb.test()
@@ -147,3 +162,13 @@ async def read(dut):
     tester.start()
     await tester.axi_reset(100)
     await Timer(100, "ns")
+    read_address = random.randbytes(4)
+    read_data_axi = random.randbytes(4)
+    read_data_spi = random.randbytes(4)
+    await tester.spi_write(1)  # Initiate a read transaction
+    for i in range(4):
+        await tester.spi_write(read_address[i])
+    dut.spi_mosi.value = 0  # Don't care about MOSI for the rest of transaction
+    for i in range(4):
+        read_data_spi[i] = await tester.spi_read()
+    print(read_data_spi)

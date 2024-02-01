@@ -1,7 +1,9 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1706804718" />
-    <testcase name="write" classname="tb" file="/mnt/c/Users/maha7943/Documents/PersonalProjects/Cocotb/SpiToAxi/tb.py" lineno="118" time="0.3084676265716553" sim_time_ns="37600.001" ratio_time="121892.85928604806" />
-    <testcase name="read" classname="tb" file="/mnt/c/Users/maha7943/Documents/PersonalProjects/Cocotb/SpiToAxi/tb.py" lineno="142" time="0.0020842552185058594" sim_time_ns="2200.001000000004" ratio_time="1055533.4013159478" />
+    <property name="random_seed" value="1706830125" />
+    <testcase name="write" classname="tb" file="/mnt/c/Users/maha7943/Documents/PersonalProjects/Cocotb/SpiToAxi/tb.py" lineno="131" time="0.2971048355102539" sim_time_ns="37600.001" ratio_time="126554.65851111103" />
+    <testcase name="read" classname="tb" file="/mnt/c/Users/maha7943/Documents/PersonalProjects/Cocotb/SpiToAxi/tb.py" lineno="157" time="0.24363446235656738" sim_time_ns="22200.001000000004" ratio_time="91120.11816911821">
+      <failure message="Test failed with RANDOM_SEED=1706830125" />
+    </testcase>
   </testsuite>
 </testsuites>
