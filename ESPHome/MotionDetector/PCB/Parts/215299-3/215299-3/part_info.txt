@@ -1,0 +1,9 @@
+Manufacturer=TE Connectivity
+PartNumber=215299-3
+PartCategory=Connector
+PackageCategory=Header, Shrouded - Straight PTH Box
+PinCount=3
+Version=4.1
+Released=2017-01-27 22:05:25
+Downloaded=2024-12-29 21:30:36
+3D=Y

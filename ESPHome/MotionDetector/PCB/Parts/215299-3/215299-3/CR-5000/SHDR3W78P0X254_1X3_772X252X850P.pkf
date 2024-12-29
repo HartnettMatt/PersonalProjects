@@ -1,0 +1,10 @@
+(unit MM)
+
+(package "SHDR3W78P0X254_1X3_772X252X850P"
+    (type UNDEF)
+    (uver 2)
+    (mountForm default
+        (footprintRef "SHDR3W78P0X254_1X3_772X252X850P")
+        (spec "default")
+    )
+)
