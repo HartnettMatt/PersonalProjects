@@ -2,3 +2,4 @@ Cocotb/SpiToAxi/sim_build/
 *.pyc
 Cocotb/SpiToAxi/NUL
 *.o
+*.DS_Store
