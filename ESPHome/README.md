@@ -14,6 +14,8 @@ PCB: Houses PCB design files for hardware components of the project.
 
 3D: Contains CAD files for any 3D-printed elements required by the project.
 
+Docs: Any relevant documentation for the project.
+
 ## Current Projects
 
 ### MotionDetector
