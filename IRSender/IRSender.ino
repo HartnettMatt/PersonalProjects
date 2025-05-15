@@ -26,7 +26,7 @@
 #include <IRremote.hpp> // include the library
 
 uint8_t cmd1 = 0x45;
-uint8_t cmd2 = 0x09;
+uint8_t cmd2 = 0x5E;
 uint8_t sRepeats = 4;
 
 void setup() {
