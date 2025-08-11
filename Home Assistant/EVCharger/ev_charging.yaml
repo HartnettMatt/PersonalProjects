@@ -1,0 +1,198 @@
+# /config/packages/ev_charging.yaml
+
+################################################################################
+# HELPERS (persisted; survive power cycles)
+################################################################################
+input_number:
+  ev_month_kwh:
+    name: EV Month kWh (running)
+    min: 0
+    max: 100000
+    step: 0.001
+    unit_of_measurement: kWh
+    mode: box
+    icon: mdi:ev-station
+
+  ev_last_nonzero_kwh:
+    name: EV Last Non-Zero Session Value
+    min: 0
+    max: 1000
+    step: 0.001
+    unit_of_measurement: kWh
+    mode: box
+    icon: mdi:counter
+
+  # Month archives (rolling last 12 months; overwritten next year)
+  ev_kwh_jan: { name: EV kWh January,   min: 0, max: 100000, step: 0.001, unit_of_measurement: kWh, mode: box }
+  ev_kwh_feb: { name: EV kWh February,  min: 0, max: 100000, step: 0.001, unit_of_measurement: kWh, mode: box }
+  ev_kwh_mar: { name: EV kWh March,     min: 0, max: 100000, step: 0.001, unit_of_measurement: kWh, mode: box }
+  ev_kwh_apr: { name: EV kWh April,     min: 0, max: 100000, step: 0.001, unit_of_measurement: kWh, mode: box }
+  ev_kwh_may: { name: EV kWh May,       min: 0, max: 100000, step: 0.001, unit_of_measurement: kWh, mode: box }
+  ev_kwh_jun: { name: EV KWh June,      min: 0, max: 100000, step: 0.001, unit_of_measurement: kWh, mode: box }
+  ev_kwh_jul: { name: EV KWh July,      min: 0, max: 100000, step: 0.001, unit_of_measurement: kWh, mode: box }
+  ev_kwh_aug: { name: EV KWh August,    min: 0, max: 100000, step: 0.001, unit_of_measurement: kWh, mode: box }
+  ev_kwh_sep: { name: EV KWh September, min: 0, max: 100000, step: 0.001, unit_of_measurement: kWh, mode: box }
+  ev_kwh_oct: { name: EV KWh October,   min: 0, max: 100000, step: 0.001, unit_of_measurement: kWh, mode: box }
+  ev_kwh_nov: { name: EV KWh November,  min: 0, max: 100000, step: 0.001, unit_of_measurement: kWh, mode: box }
+  ev_kwh_dec: { name: EV KWh December,  min: 0, max: 100000, step: 0.001, unit_of_measurement: kWh, mode: box }
+
+################################################################################
+# FILE LOGGER (non-volatile CSV in /config/ev_charging/ev_charging_log.csv)
+################################################################################
+notify:
+  - platform: file
+    name: ev_charging_log
+    filename: /config/ev_charging/ev_charging_log.csv
+    timestamp: false
+
+################################################################################
+# OPTIONAL: keep 365 days of recorder history
+################################################################################
+# recorder:
+#   purge_keep_days: 365
+
+################################################################################
+# AUTOMATIONS
+################################################################################
+automation:
+
+  # 1) Track the most recent non-zero reading each time the charger reports
+  - id: ev_track_last_nonzero
+  - alias: EV – Track last non-zero session value
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id: sensor.us15_m2_16_32a_total_energy
+    condition:
+      - condition: template
+        value_template: "{{ trigger.to_state is not none and (trigger.to_state.state | float(0) > 0) }}"
+    action:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.ev_last_nonzero_kwh
+        data:
+          value: "{{ trigger.to_state.state | float(0) }}"
+
+  # 2) When the charger resets to zero, add the last session's kWh to the monthly counter
+  - id: ev_add_session_on_reset
+    alias: EV – Add session to monthly when sensor resets to 0
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id: sensor.us15_m2_16_32a_total_energy
+    condition:
+      - condition: template
+        value_template: >
+          {{ trigger.from_state is not none and trigger.to_state is not none
+             and (trigger.from_state.state | float(0)) > 0
+             and (trigger.to_state.state   | float(1)) == 0 }}
+    action:
+      - variables:
+          last_session: "{{ states('input_number.ev_last_nonzero_kwh') | float(0) }}"
+          new_total: "{{ states('input_number.ev_month_kwh') | float(0) + last_session }}"
+      - service: input_number.set_value
+        target: { entity_id: input_number.ev_month_kwh }
+        data:
+          value: "{{ new_total }}"
+      - service: input_number.set_value
+        target: { entity_id: input_number.ev_last_nonzero_kwh }
+        data:
+          value: 0
+
+  # 3) HA restart resilience: if HA boots and the charger is at 0 but we remember
+  #    a last_nonzero value, assume a session ended while HA was down and add it.
+  - id: ev_reconcile_on_start
+    alias: EV – Reconcile missed session on HA start
+    mode: single
+    trigger:
+      - platform: homeassistant
+        event: start
+    condition:
+      - condition: template
+        value_template: "{{ states('sensor.us15_m2_16_32a_total_energy') | float(0) == 0 }}"
+      - condition: template
+        value_template: "{{ states('input_number.ev_last_nonzero_kwh') | float(0) > 0 }}"
+    action:
+      - variables:
+          last_session: "{{ states('input_number.ev_last_nonzero_kwh') | float(0) }}"
+          new_total: "{{ states('input_number.ev_month_kwh') | float(0) + last_session }}"
+      - service: input_number.set_value
+        target: { entity_id: input_number.ev_month_kwh }
+        data:
+          value: "{{ new_total }}"
+      - service: input_number.set_value
+        target: { entity_id: input_number.ev_last_nonzero_kwh }
+        data:
+          value: 0
+
+  # 4) Month closeout: store previous month, compute cost (seasonal rate),
+  #    notify phone, append CSV, and reset running counter.
+  - id: ev_monthly_closeout
+    alias: EV – Monthly closeout, notify, and reset
+    mode: single
+    trigger:
+      - platform: time
+        at: "00:05:00"
+    condition:
+      - condition: template
+        value_template: "{{ now().day == 1 }}"
+    action:
+      - variables:
+          kwh: "{{ states('input_number.ev_month_kwh') | float(0) }}"
+          # previous month number (1..12)
+          prev_month: "{{ 12 if now().month == 1 else (now().month - 1) }}"
+          month_names: ["January","February","March","April","May","June","July","August","September","October","November","December"]
+          month_name: "{{ month_names[ (12 if now().month == 1 else now().month - 1) - 1 ] }}"
+          # Rates: summer Jun–Sep -> 0.17734 $/kWh, otherwise 0.11194 $/kWh
+          rate: "{{ 0.17734 if prev_month in [6,7,8,9] else 0.11194 }}"
+          cost: "{{ (kwh * rate) | round(2) }}"
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ prev_month == 1 }}"
+            sequence:
+              - service: input_number.set_value
+                target: { entity_id: input_number.ev_kwh_jan }
+                data: { value: "{{ kwh }}" }
+          - conditions: [ { condition: template, value_template: "{{ prev_month == 2 }}" } ]
+            sequence: [ { service: input_number.set_value, target: { entity_id: input_number.ev_kwh_feb }, data: { value: "{{ kwh }}" } } ]
+          - conditions: [ { condition: template, value_template: "{{ prev_month == 3 }}" } ]
+            sequence: [ { service: input_number.set_value, target: { entity_id: input_number.ev_kwh_mar }, data: { value: "{{ kwh }}" } } ]
+          - conditions: [ { condition: template, value_template: "{{ prev_month == 4 }}" } ]
+            sequence: [ { service: input_number.set_value, target: { entity_id: input_number.ev_kwh_apr }, data: { value: "{{ kwh }}" } } ]
+          - conditions: [ { condition: template, value_template: "{{ prev_month == 5 }}" } ]
+            sequence: [ { service: input_number.set_value, target: { entity_id: input_number.ev_kwh_may }, data: { value: "{{ kwh }}" } } ]
+          - conditions: [ { condition: template, value_template: "{{ prev_month == 6 }}" } ]
+            sequence: [ { service: input_number.set_value, target: { entity_id: input_number.ev_kwh_jun }, data: { value: "{{ kwh }}" } } ]
+          - conditions: [ { condition: template, value_template: "{{ prev_month == 7 }}" } ]
+            sequence: [ { service: input_number.set_value, target: { entity_id: input_number.ev_kwh_jul }, data: { value: "{{ kwh }}" } } ]
+          - conditions: [ { condition: template, value_template: "{{ prev_month == 8 }}" } ]
+            sequence: [ { service: input_number.set_value, target: { entity_id: input_number.ev_kwh_aug }, data: { value: "{{ kwh }}" } } ]
+          - conditions: [ { condition: template, value_template: "{{ prev_month == 9 }}" } ]
+            sequence: [ { service: input_number.set_value, target: { entity_id: input_number.ev_kwh_sep }, data: { value: "{{ kwh }}" } } ]
+          - conditions: [ { condition: template, value_template: "{{ prev_month == 10 }}" } ]
+            sequence: [ { service: input_number.set_value, target: { entity_id: input_number.ev_kwh_oct }, data: { value: "{{ kwh }}" } } ]
+          - conditions: [ { condition: template, value_template: "{{ prev_month == 11 }}" } ]
+            sequence: [ { service: input_number.set_value, target: { entity_id: input_number.ev_kwh_nov }, data: { value: "{{ kwh }}" } } ]
+          - conditions: [ { condition: template, value_template: "{{ prev_month == 12 }}" } ]
+            sequence: [ { service: input_number.set_value, target: { entity_id: input_number.ev_kwh_dec }, data: { value: "{{ kwh }}" } } ]
+
+      # Send to your phone (replace with your actual mobile app notify service)
+      - service: notify.notify   # e.g., notify.mobile_app_matts_phone
+        data:
+          title: "EV Charging — {{ month_name }}"
+          message: >
+            {{ "%.2f"|format(kwh) }} kWh
+            • Cost ${{ "%.2f"|format(cost) }}
+            (rate ${{ rate }} per kWh).
+
+      # Append a CSV line: YYYY-MM,kWh,cost
+      - service: notify.ev_charging_log
+        data:
+          message: >
+            {{ now().year }}-{{ "%02d"|format(prev_month) }},{{ kwh | round(3) }},{{ cost | round(2) }}
+
+      # Reset month counter for the new month
+      - service: input_number.set_value
+        target: { entity_id: input_number.ev_month_kwh }
+        data: { value: 0 }
