@@ -1,0 +1,60 @@
+
+=== Personal: User Files ===
+📁 my files [id=515601]
+    📁 conversation attachments [id=543114] — my files/conversation attachments
+    📁 profile pictures [id=515602] — my files/profile pictures
+    📁 Submissions [id=561532] — my files/Submissions
+        📁 APPM 2360: Intro Diff Eq W_Lin Alg [id=624818] — my files/Submissions/APPM 2360: Intro Diff Eq W_Lin Alg
+        📁 CSCI 3002-100-106,010:Fundamentals of HCI [id=1524482] — my files/Submissions/CSCI 3002-100-106,010:Fundamentals of HCI
+        📁 CSCI 3302 _ ECEN 3303: Introduction to Robotics [id=1384063] — my files/Submissions/CSCI 3302 _ ECEN 3303: Introduction to Robotics
+        📁 CSCI-ECEN 4693-5593-001:Advn Computer Architecture_Advanced Computer Architecture [id=2324303] — my files/Submissions/CSCI-ECEN 4693-5593-001:Advn Computer Architecture_Advanced Computer Architecture
+        📁 ECEN 1100-001: Exploring ECE [id=561533] — my files/Submissions/ECEN 1100-001: Exploring ECE
+        📁 ECEN 2250 - Intro Circuits & Electronics [id=713866] — my files/Submissions/ECEN 2250 - Intro Circuits & Electronics
+        📁 ECEN 2260-001: Circuits as Systems [id=996400] — my files/Submissions/ECEN 2260-001: Circuits as Systems
+        📁 ECEN 2270-010,011,012:Electronics Design Lab [id=917064] — my files/Submissions/ECEN 2270-010,011,012:Electronics Design Lab
+        📁 ECEN 2310-001,002:ECEN 2310: Math SW Programming_Math SW Programming [id=1204373] — my files/Submissions/ECEN 2310-001,002:ECEN 2310: Math SW Programming_Math SW Programming
+        📁 ECEN 2350-001,002:Digital Logic [id=721415] — my files/Submissions/ECEN 2350-001,002:Digital Logic
+        📁 ECEN 2370-010,011:Embedded Software Engineering [id=934550] — my files/Submissions/ECEN 2370-010,011:Embedded Software Engineering
+        📁 ECEN 2410-001: Renew Electrical Energy Syst [id=730636] — my files/Submissions/ECEN 2410-001: Renew Electrical Energy Syst
+        📁 ECEN 2703-001: Discrete Math Compt Engineers [id=709917] — my files/Submissions/ECEN 2703-001: Discrete Math Compt Engineers
+        📁 ECEN 3002-010,012:Special Topics [id=945399] — my files/Submissions/ECEN 3002-010,012:Special Topics
+        📁 ECEN 3250-001: Microelectronics [id=1104235] — my files/Submissions/ECEN 3250-001: Microelectronics
+        📁 ECEN 3400-001: Electromag Flds_Waves [id=1154764] — my files/Submissions/ECEN 3400-001: Electromag Flds_Waves
+        📁 ECEN 4_5224: High Speed Digital Design [id=1545478] — my files/Submissions/ECEN 4_5224: High Speed Digital Design
+        📁 ECEN 5813-001,002: Principle of Embedded Software [id=2737390] — my files/Submissions/ECEN 5813-001,002: Principle of Embedded Software
+        📁 ECEN 5863-001,002: Programmable Logic Design [id=2188846] — my files/Submissions/ECEN 5863-001,002: Programmable Logic Design
+        📁 ECEN-CSCI 3593-4593-001:Computer Organization [id=1438026] — my files/Submissions/ECEN-CSCI 3593-4593-001:Computer Organization
+        📁 Group 1: Ben C., Bryce, and Matt [id=1264967] — my files/Submissions/Group 1: Ben C., Bryce, and Matt
+        📁 Group 2: Matt, Ben H., and Angelo [id=1263051] — my files/Submissions/Group 2: Matt, Ben H., and Angelo
+        📁 MUEL 3892-001: Music and Space [id=1484768] — my files/Submissions/MUEL 3892-001: Music and Space
+        📁 PHYS 1140-100 and 200: Experimental Physics 1 [id=591135] — my files/Submissions/PHYS 1140-100 and 200: Experimental Physics 1
+        📁 WRTG 3030-003: Writing on Science and Society [id=1257478] — my files/Submissions/WRTG 3030-003: Writing on Science and Society
+    📁 unfiled [id=2792628] — my files/unfiled
+
+=== Course: ECEN 4003/5003:Embedded AI (Special Topics) (id=122711) ===
+📁 course files [id=2954703]
+
+=== Course: ECEN 5813-001,002: Principle of Embedded Software (id=104083) ===
+📁 course files [id=2450257]
+    📁 Assignments [id=2464137] — course files/Assignments
+        📁 Assignment1 [id=2464139] — course files/Assignments/Assignment1
+        📁 Assignment2 [id=2464141] — course files/Assignments/Assignment2
+        📁 Assignment3 [id=2464138] — course files/Assignments/Assignment3
+        📁 Assignment4 [id=2464144] — course files/Assignments/Assignment4
+        📁 Assignment5 [id=2464143] — course files/Assignments/Assignment5
+        📁 Assignment6 [id=2464142] — course files/Assignments/Assignment6
+        📁 Assignment7 [id=2464140] — course files/Assignments/Assignment7
+    📁 Documents [id=2464148] — course files/Documents
+    📁 Final Project [id=2464145] — course files/Final Project
+    📁 Frdm_Arm_documents [id=2464147] — course files/Frdm_Arm_documents
+    📁 Lectures [id=2476653] — course files/Lectures
+    📁 Nucleo_Arm_documents [id=2476654] — course files/Nucleo_Arm_documents
+    📁 Uploaded Media [id=2464146] — course files/Uploaded Media
+
+=== Course: GEEN 3010-010,011:Circuits for Engineers (id=75209) ===
+📁 course files [id=1300726]
+    📁 course_image [id=1302683] — course files/course_image
+    📁 images [id=1302684] — course files/images
+    📁 Instructor images [id=1302681] — course files/Instructor images
+    📁 unfiled [id=1302682] — course files/unfiled
+    📁 Uploaded Media [id=1443374] — course files/Uploaded Media

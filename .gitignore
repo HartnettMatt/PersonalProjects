@@ -3,3 +3,4 @@ Cocotb/SpiToAxi/sim_build/
 Cocotb/SpiToAxi/NUL
 *.o
 *.DS_Store
+CanvasBot/api_key.txt

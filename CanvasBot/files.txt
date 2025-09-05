@@ -1,0 +1,19 @@
+
+=== 📚 Course Information ===
+  📄 syllabus-EmbeddedAI-Fall2025.pdf (id=80139885, 200.7 KB, updated 2025-09-04T17:59:39Z)
+
+=== 📚 Week 1 - Introduction (Aug 21, 2025) ===
+  📄 lec01-intro.pdf (id=80139641, 499.2 KB, updated 2025-08-20T02:18:11Z)
+
+=== 📚 Week 2 - AI Overview (Aug 26, 28) ===
+  📄 lec02-intro_to_ai.pdf (id=80328898, 1.9 MB, updated 2025-08-23T21:12:24Z)
+  📄 Lec02_BasicTensorflowWithMNIST.ipynb (id=80379813, 337.7 KB, updated 2025-08-27T18:30:37Z)
+  📄 Lec02_ClassOfIris.ipynb (id=80399643, 589.2 KB, updated 2025-08-28T21:12:25Z)
+  📄 Lec02_EnergyUsagePrediction.ipynb (id=80399645, 187.3 KB, updated 2025-08-28T21:12:26Z)
+  📄 wk2-IoT-dataset.csv.gz (id=80328900, 1.6 MB, updated 2025-08-23T19:11:17Z)
+
+=== 📚 Week 3 (Sept 2, 4) ===
+  📄 lec03-tflite_hello_world.pdf (id=80440691, 614.6 KB, updated 2025-09-01T22:06:49Z)
+  📄 Lec03_hello_world Training.ipynb (id=80484792, 559.4 KB, updated 2025-09-04T16:34:47Z)
+  📄 linux_git_git_classroom.pdf (id=80379833, 555.3 KB, updated 2025-08-28T01:41:17Z)
+  📄 wk3-better-accuracy-aside.pdf (id=80447879, 74.1 KB, updated 2025-09-02T16:55:52Z)
