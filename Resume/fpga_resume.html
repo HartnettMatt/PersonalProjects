@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     /* --- Page --- */
-    @page { size: letter; margin: 0.6in; }
+    @page { size: letter; margin: 0.55in; }
     html, body { margin: 0; padding: 0; }
     body {
-      font: 8.5pt/1.35 -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font: 8pt/1.25 -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       color: #1a1a1a;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
@@ -17,42 +17,41 @@
 
     /* --- Layout --- */
     .wrap { max-width: 8.5in; margin: 0 auto; }
-    section { margin-top: .55rem; }
+    section { margin-top: .4rem; }
     .muted { color: #555; }
 
     /* --- Header --- */
-    header { margin-bottom: .25rem; }
+    header { margin-bottom: .15rem; }
     .name {
-      font-size: 19pt;
+      font-size: 18pt;
       font-weight: 650;
-      letter-spacing: .2px;
       margin: 0;
       text-align: center;
     }
     .contact {
-      margin-top: .12rem;
-      font-size: 9pt;
+      margin-top: .08rem;
+      font-size: 8.6pt;
       color: #444;
       text-align: center;
     }
-    .contact a { color: inherit; text-decoration: none; border-bottom: 1px dotted #bbb; }
-    .contact a:hover { border-bottom-color: #666; }
+    .contact a { color: inherit; text-decoration: none; border-bottom: 1px dotted #aaa; }
+    .contact a:hover { border-bottom-color: #555; }
 
     /* --- Section titles --- */
     h2 {
-      font: 700 10.2pt/1.2 inherit;
-      margin: .6rem 0 .2rem 0;
-      padding-left: .35rem;
-      border-left: 3px solid #c9c9c9;
-      letter-spacing: .2px;
+      font: 700 9.6pt/1.1 inherit;
+      margin: .45rem 0 .15rem 0;
+      padding-left: .3rem;
+      border-left: 2px solid #c9c9c9;
+      letter-spacing: .15px;
     }
 
     /* --- Experience block --- */
-    .block { page-break-inside: avoid; margin-bottom: .35rem; }
+    .block { page-break-inside: avoid; margin-bottom: .25rem; }
     .row {
       display: flex;
       align-items: baseline;
-      gap: .5rem;
+      gap: .4rem;
       flex-wrap: nowrap;
     }
     .row .left { flex: 1 1 auto; min-width: 0; }
@@ -61,21 +60,22 @@
       white-space: nowrap;
       color: #555;
       font-variant-numeric: tabular-nums;
+      font-size: 7.8pt;
     }
     .role { font-weight: 700; }
     .place { color: #444; }
-    .loc { color: #666; font-style: normal; }
+    .loc { color: #666; font-style: normal; font-size: 7.8pt; }
 
     /* --- Lists --- */
-    ul { margin: .18rem 0 .28rem 1.0rem; padding: 0; }
-    li { margin: 0 0 .14rem 0; }
+    ul { margin: .12rem 0 .22rem 0.9rem; padding: 0; }
+    li { margin: 0 0 .1rem 0; }
 
     /* --- Projects --- */
-    .proj-title { font-weight: 700; margin-bottom: .05rem; }
+    .proj-title { font-weight: 700; margin-bottom: .04rem; }
 
     /* --- Skills list --- */
-    .skills-list { margin: .18rem 0 .18rem 0; }
-    .skills-list li { margin: 0 0 .1rem 0; }
+    .skills-list { margin: .12rem 0 .15rem 0; }
+    .skills-list li { margin: 0 0 .08rem 0; }
 
     /* --- Print tweaks --- */
     @media print {
